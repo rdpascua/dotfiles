@@ -1,0 +1,32 @@
+let mapleader=" "
+set relativenumber number
+set nerdtree 
+set commentary
+set highlightedyank
+set surround
+
+let g:highlightedyank_highlight_color = "rgba(255, 255, 0, 255)"
+let g:highlightedyank_highlight_duration = "200"
+
+map <leader><leader> <Action>(RecentFiles)
+map <leader>pv :NERDTree<CR>
+map <leader>sf <Action>(GotoFile)
+map <leader>sf <Action>(GotoFile)
+map <leader>sd <Action>(GotoDatabaseObject)
+map <leader>re <Action>(RenameElement)
+map <leader>ce <Action>(CopyElement)
+map <leader>rt <Action>(RunClass)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>ff <Action>(SelectIn)
+map <leader>rf <Action>(RenameFile)
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>x <Action>(CloseContent)
+map <leader>mt <Action>(MoveEditorToOppositeTabGroup)
+
+map <leader>t1 <Action>(GoToTab1)
+map <leader>t2 <Action>(GoToTab2)
+map <leader>t3 <Action>(GoToTab3)
+map <leader>t4 <Action>(GoToTab4)
+map <leader>t5 <Action>(GoToTab5)
+
+asdasd
