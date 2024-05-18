@@ -10,10 +10,10 @@ export NVM_DIR="$HOME/.nvm"
 
 #export PATH=/Users/Shared/DBngin/postgresql/12.2/bin:$PATH
 #export PATH=/Users/ricardopascua/.nvm/versions/node/v18.19.0/bin:$PATH
-export PATH=/Users/Shared/DBngin/postgresql/14.3/bin:$PATH
-export PATH=/Users/Shared/DBngin/mysql/8.0.27/bin:$PATH
-export PATH=/Users/ricardopascua/.composer/vendor/bin:$PATH
-export PATH="$HOME/go/bin:$PATH"
+#export PATH=/Users/Shared/DBngin/postgresql/14.3/bin:$PATH
+#export PATH=/Users/Shared/DBngin/mysql/8.0.27/bin:$PATH
+#export PATH=/Users/ricardopascua/.composer/vendor/bin:$PATH
+#export PATH="$HOME/go/bin:$PATH"
 
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
@@ -29,7 +29,6 @@ export NODE_PATH=$NODE_PATH:`npm root -g`
 #php
 #export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
 alias vim="nvim"
-
 export EDITOR=nvim
 
 # bun completions
@@ -46,6 +45,7 @@ art() {
         echo "artisan not found in the current directory"
     fi
 }
+
 
 # alias for git
 alias gitardee="git fetch origin && git branch -D ardee || true && git checkout -b ardee origin/ardee/dev && git rebase main && git checkout main && git merge ardee"
