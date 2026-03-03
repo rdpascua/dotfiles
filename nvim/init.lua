@@ -196,6 +196,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Close buffer
+vim.keymap.set('n', '<leader>x', '<cmd>bd<CR>', { desc = 'Close buffer' })
+
 -- navigation
 -- vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Vim-Ex Mode' })
 -- vim.keymap.set('n', '<leader>pv', vim.cmd.Neotree, { desc = 'NeoTree' })

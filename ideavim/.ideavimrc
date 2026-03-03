@@ -11,7 +11,6 @@ let g:highlightedyank_highlight_duration = "200"
 map <leader><leader> <Action>(RecentFiles)
 map <leader>pv :NERDTree<CR>
 map <leader>sf <Action>(GotoFile)
-map <leader>sf <Action>(GotoFile)
 map <leader>sd <Action>(GotoDatabaseObject)
 map <leader>re <Action>(RenameElement)
 map <leader>ce <Action>(CopyElement)
@@ -28,5 +27,3 @@ map <leader>t2 <Action>(GoToTab2)
 map <leader>t3 <Action>(GoToTab3)
 map <leader>t4 <Action>(GoToTab4)
 map <leader>t5 <Action>(GoToTab5)
-
-asdasd
