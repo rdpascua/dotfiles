@@ -29,6 +29,19 @@ chmod +x install.sh
 | IdeaVim | `ideavim/.ideavimrc` |
 | Atuin | `atuin/` |
 | iTerm2 | `iterm2/` |
+| Fonts | `fonts/` |
+
+## Fonts
+
+Includes [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/) patched with [Nerd Font](https://www.nerdfonts.com/) icons for full icon support in Neovim.
+
+To install, copy the font files to your system:
+
+```sh
+cp fonts/*.ttf ~/Library/Fonts/
+```
+
+Then set **BerkeleyMono Nerd Font** as your terminal font (e.g. iTerm2 → Preferences → Profiles → Text → Font).
 
 ## Post-install
 
