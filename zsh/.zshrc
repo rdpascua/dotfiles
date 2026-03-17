@@ -21,8 +21,10 @@ export PATH=/Users/Shared/DBngin/postgresql/16.2/bin:$PATH
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
-export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
+if command -v gpgconf &> /dev/null; then
+  export GPG_TTY=$(tty)
+  gpgconf --launch gpg-agent
+fi
 
 alias pa="php artisan"
 
@@ -69,8 +71,11 @@ eval "$(atuin init zsh)"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+export PATH="$HOME/.local/bin:$PATH"
 
 # jenv - Java version manager
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+if command -v jenv &> /dev/null; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
