@@ -84,6 +84,17 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- Ensure nvm-managed node is available to LSP servers
+local nvm_dir = vim.fn.expand '~/.nvm/versions/node'
+if vim.fn.isdirectory(nvm_dir) == 1 then
+  local versions = vim.fn.glob(nvm_dir .. '/v*', false, true)
+  table.sort(versions)
+  local latest = versions[#versions]
+  if latest then
+    vim.env.PATH = latest .. '/bin:' .. vim.env.PATH
+  end
+end
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -97,6 +108,9 @@ vim.g.have_nerd_font = true
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+
+-- Enable 24-bit RGB colors in the terminal
+vim.opt.termguicolors = true
 
 -- Make line numbers default
 vim.opt.number = true
@@ -861,6 +875,8 @@ require('lazy').setup({
     init = function()
       vim.cmd.colorscheme 'monokai-pro'
       vim.cmd.hi 'Comment gui=none'
+      vim.cmd.hi 'Normal guibg=#000000'
+      vim.cmd.hi 'NormalFloat guibg=#000000'
       -- fix for the miniai statusbar when using spectrum
       vim.cmd.hi 'Cursor guifg=#bab6c0 guibg=#363537'
     end,
@@ -911,6 +927,7 @@ require('lazy').setup({
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     build = ':TSUpdate',
     opts = {
@@ -920,17 +937,11 @@ require('lazy').setup({
         'templ', 'tsx', 'typescript', 'vim', 'vimdoc', 'yaml',
       },
       auto_install = true,
+      highlight = { enable = true },
+      indent = { enable = true },
     },
     config = function(_, opts)
-      require('nvim-treesitter').setup(opts)
-
-      -- Enable treesitter-based highlighting and indentation
-      vim.treesitter.start = vim.treesitter.start or function() end
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
+      require('nvim-treesitter.configs').setup(opts)
     end,
   },
 
