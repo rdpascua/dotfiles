@@ -389,7 +389,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for install instructions
@@ -433,15 +433,24 @@ require('lazy').setup({
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
-        -- You can put your default mappings / updates / etc. in here
-        --  All the info you're looking for is in `:help telescope.setup()`
-        --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
+        defaults = {
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',
+            '--glob', '!.git/',
+          },
+        },
+        pickers = {
+          find_files = {
+            find_command = { 'fd', '--type', 'f', '--hidden', '--exclude', '.git' },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -642,8 +651,6 @@ require('lazy').setup({
           },
         },
         templ = {},
-        tailwindcss = {},
-        ts_ls = {},
         -- tsserver = {
         --   on_attach = function(client)
         --     -- this is important, otherwise tsserver will format ts/js
@@ -651,9 +658,7 @@ require('lazy').setup({
         --     client.server_capabilities.documentFormattingProvider = false
         --   end,
         -- },
-        intelephense = {},
-        biome = {},
-        emmet_ls = {},
+
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -698,6 +703,16 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- Servers installed globally (not managed by Mason)
+      vim.lsp.config('tailwindcss', { capabilities = capabilities })
+      vim.lsp.enable('tailwindcss')
+      vim.lsp.config('intelephense', { capabilities = capabilities })
+      vim.lsp.enable('intelephense')
+      vim.lsp.config('ts_ls', { capabilities = capabilities })
+      vim.lsp.enable('ts_ls')
+      vim.lsp.config('biome', { capabilities = capabilities })
+      vim.lsp.enable('biome')
     end,
   },
 
