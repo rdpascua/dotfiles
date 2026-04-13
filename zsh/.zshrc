@@ -5,17 +5,9 @@ plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# Lazy-load nvm (saves ~500ms on shell startup)
 export NVM_DIR="$HOME/.nvm"
-lazy_load_nvm() {
-  unset -f nvm node npm npx
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-nvm() { lazy_load_nvm && nvm "$@"; }
-node() { lazy_load_nvm && node "$@"; }
-npm() { lazy_load_nvm && npm "$@"; }
-npx() { lazy_load_nvm && npx "$@"; }
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export PATH=/Users/Shared/DBngin/postgresql/17.0/bin:$PATH
 export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -61,14 +53,25 @@ alias gadev="git fetch origin && git branch -D ardee || true && git checkout -b 
 alias gastag="git fetch origin && git branch -D ardee || true && git checkout -b ardee origin/ardee/dev && git rebase staging && git checkout staging && git merge ardee"
 alias gsb="git checkout develop && git checkout staging && git merge develop && git checkout main && git merge develop && git push origin staging main"
 
-# Zoxide
-eval "$(zoxide init --cmd cd zsh)"
-
 # Shopify Hydrogen alias to local projects
 alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
 eval "$(atuin init zsh)"
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+# iTerm2 profile switching on SSH
+iterm2_profile() {
+  echo -ne "\033]1337;SetProfile=$1\007"
+}
+
+ssh() {
+  case "$*" in
+    *100.113.13.86*) iterm2_profile "SSH - Tailscale" ;;
+    *)               iterm2_profile "SSH - Prod" ;;
+  esac
+  command ssh "$@"
+  iterm2_profile "Default"
+}
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
@@ -79,3 +82,6 @@ if command -v jenv &> /dev/null; then
   export PATH="$HOME/.jenv/bin:$PATH"
   eval "$(jenv init -)"
 fi
+
+# Zoxide
+eval "$(zoxide init --cmd cd zsh)"
