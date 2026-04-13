@@ -69,8 +69,11 @@ ssh() {
     *100.113.13.86*) iterm2_profile "SSH - Tailscale" ;;
     *)               iterm2_profile "SSH - Prod" ;;
   esac
-  command ssh "$@"
-  iterm2_profile "Default"
+  {
+    command ssh "$@"
+  } always {
+    iterm2_profile "Default"
+  }
 }
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
