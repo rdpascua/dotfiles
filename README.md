@@ -3,7 +3,7 @@
 ## Prerequisites
 
 ```sh
-brew install neovim git-delta zoxide atuin
+brew install neovim git-delta zoxide atuin fd ripgrep
 ```
 
 ```sh
